@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{float}
+\usepackage{siunitx}
+
+\title{InAs}
+
+
+\begin{document}
+
+\maketitle
+
+\section{Note}
+
+    Photoconductivity is commonly analyzed in terms of the number and mobility of the excited electrons in an electron conduction band and of holes in a lower-energy valence band.\\
+    We need to know the dark conductivity, band gap, light absorption spectrum, carrier mobility, quantum efficiency, response time, and impurities.
+
+
+\section{properties}
+
+    This part will show the basic properties of Indium Arsenide (InAs) which are related to photoconductivity.
+    
+    \subsection{basic parameters (no impurities)}
+    
+    Energy gap $0.354\,eV$ room temperature\\
+    Intrinsic carrier concentration 	$1·1015\,\,cm^{-3}$\\
+    Intrinsic resistivity 	$0.16\,\, \Omega\cdot cm$\\
+    Effective conduction band density of states 	$8.7·1016\,cm^{-3}$\\
+    Effective valence band density of states 	$6.6·1018\,cm^{-3}$\\
+    Mobility of electrons 	$\leq4·104\,\, cm^2\cdot V^{-1}\cdot s^{-1}$\\
+    Mobility of holes 	$\leq5·102\,\, cm^2\cdot V^{-1}\cdot s^{-1}$
+
+    \subsection{Energy Gap Narrowing at High Doping Levels}
+    
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{gap narrowing.png}
+        \end{figure}
+
+    \subsection{dark current}
+        \begin{figure}][H]
+            \centering
+            \includegraphics[width=1\linewidth]{dark1.png}
+            \caption{Reverse current vs inverse temperature at different voltage biases.
+                    Solid and open symbols represent the results of p-i-n and p-n diodes,
+                    respectively. The dashed lines denote the diffusion current while the dotted
+                    line represents the generation-recombination current. The derived band gap
+                    energy is 0.38 eV and the current ratio of two dashed lines is 3.3.}
+        \end{figure}
+    
+        \begin{figure}[H]
+            \centering
+            \includegraphics[width=1\linewidth]{dark.png}
+            \caption{Forward current vs bias voltage at different temperatures. Solid and
+                    dotted curves represent the results of p-i-n and p-n diodes, respectively.
+                    The dashed lines denote the 1 kT diffusion currents at 300 K, and their
+                    current ratio is 3.3.}
+        \end{figure}
+        
+        \begin{figure}][H]
+            \centering
+            \includegraphics[width=1\linewidth]{1-s2.0-S135044951630041X-gr2_lrg.jpg}
+            \caption{Temperature-dependent semilog I–V characteristics of InAs double heterostructures diode with d = \SI{90}                     {\micro\meter}.}
+        \end{figure}
+
+    \newpage
+    \subsection{response time}
+    
+        The device is based on the InAs/InAsSb type-II superlattice with highly doped p+/n+ tunneling junctions among the stages. The detector exhibits a response time of 9.87 ns under zero voltage condition, while for 0.15 V reverse bias, that time decreases to approximately 350 ps.
+
+    \subsection{optical properties}
+        Infrared refractive index	$\approx\, 3.51\,\,(300 K)$\\
+        Radiative recombination coefficient	$1.1\times10^{-10}\,\, cm^3/s$\\
+        Long-wave TO phonon energy $\approx\, 27\,\, meV\, (300 K)$\\
+        Long-wave LO phonon energy $\approx\, 29\,\, meV\, (300 K)$
+
+
+\end{document}
