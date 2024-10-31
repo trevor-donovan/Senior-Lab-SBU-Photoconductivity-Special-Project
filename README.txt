@@ -1,5 +1,5 @@
 Here's an outline of the manual:
-Feel free to add to it to add things I missed
+Feel free to add things I missed
 --------------------------------
 Intro:
   -Historical background
