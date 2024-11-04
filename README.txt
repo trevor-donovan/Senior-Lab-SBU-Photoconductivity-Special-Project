@@ -11,7 +11,7 @@ Equipment:
 Samples
 Measurement + Analysis:
   -
-References:
+References: (Keep track of them in master_bib.bib as you use them!)
   -Theory sources
   -Sample data sources
   -VersaLab manuals
