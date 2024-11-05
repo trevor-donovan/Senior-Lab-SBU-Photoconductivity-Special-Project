@@ -4,6 +4,8 @@ Feel free to add things I missed
 Intro:
   -Historical background
   -Theory of PC
+  -Maybe the bare basics of 4-terminal measurements
+  -Maybe Van der Pauw, if we end up using the Hall option to measure resistivity directly
 Equipment:
   -VersaLab
   -MultiVu
