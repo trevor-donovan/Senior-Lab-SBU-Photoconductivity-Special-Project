@@ -1,0 +1,120 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{biblatex}
+\addbibresource{mybib.bib}
+
+\title{PC Lab Manual Improvements + Measurements + Analysis, Draft}
+\author{Trevor Donovan}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+\section*{Necessary Improvements}
+
+This section is not entirely intended for the manual as will be shown to students, but rather to advocate for certain additions to the experimental setup. We were unable to measure photoconductivity with the VersaLab setup as we had it. When the laser illuminated the sample, the thermal effect played a significant (probably dominant) role in increasing the conductivity, which could not be decoupled from direct carrier generation.
+
+We may be able to measure photoconductivity if we can interface an optical chopper and a lock-in amplifier with the VersaLab. A 2015 article described a success in isolating photoconductivity in vanadium dioxide nanowires using these two devices \parencite{wang2015}. Since the thermal effect is much slower-acting than the extremely fast direct excitation, light chopped at high frequency (a few thousand Hertz as an example from the paper), diminishes the thermal effect greatly, leaving the photoexcitation which occurs at the chopping frequency.
+
+Since the chopper causes our desired effect to occur at a specific frequency, we want to isolate and amplify effects at that frequency from others. A lock-in amplifier works by repeatedly integrating an input signal multiplied with a sinusoidal reference signal, which by the orthogonality of sinusoids cancels out most frequency components except the one matching the reference. The lock-in amplifier would also greatly reduce noise. The reference and input phases must also match \parencite{aboutLIAs}. For complicated signals, this means one can extract the orthogonal sine and cosine components of a signal at a given frequency and determine the magnitude of that frequency's (amplified) Fourier coefficient. Finding a way to install a chopper and lock-in amplifier to the VersaLab optical input and measurement system may allow us to use its sequence functionality to make autonomous measurements of direct-excitation photoconductivity at wide temperature and magnetic field ranges.
+
+In the following sections, we lay out an observation and analysis plan assuming an optical chopper and lock-in amplifier are available and can be installed in the setup.
+
+%%
+%Throw out + replace most of the analysis section, re-scrutinize the measurement section.
+%%
+
+\section*{Measurements}
+
+You will have about 8 3-hour class sessions over a period lasting a month to take measurements, do analysis, and hand in your paper. This experiment demands a number of long, autonomous measurements, so you may only need to be present at the beginning of most class periods, but it is your choice. Use that extra time to write the necessary code to do analysis on data as it is acquired.
+
+The primary goal of this experiment is to measure the photoconductivity of a few sample materials. A supplementary goal of this experiment is to measure the dependence of conductivity or resistivity on quantities such as temperature, magnetic field, and previous sample state (hysteresis).
+
+We will use the VersaLab to provide the precise temperature and field control, and chopped laser light coupled to into the multifunction probe to excite photoconductivity modulated in time. With a chopping frequency of a few kHz, this allows us to address the problem of heating the sample, since the thermal effect is a low-frequency process.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=.3]{multif_probe.png}
+    \caption{The VersaLab's multifunction probe. It allows fiber-coupled light (from the top portion shown left, with a fiber running through the central bar) to illuminate the sample mounted on the green device shown right.}
+    \label{fig:multifunction_probe}
+\end{figure}
+
+
+Before beginning the measurements sequence, make sure the resistivity option is activated (see Fig. \ref{fig:resistivity_option_multivu}) and the pressure is low (around a few Torr). For laser measurements, make sure the laser is actually on before measurements begin and will not shut off. The fault locator laser has a battery life of about 10 hours(long enough for a long measurement, but not two or three), so it may be necessary to replace it before each long measurement. 
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=.23]{multivu_demo_image.png}
+    \caption{The MultiVu user interface, which allows the creation, operation, and display of measurement sequences, graphs, and data files. The Option Manager is available from "Utilities" above. Click "Resistivity" then "Activate -->>" to activate the resistivity measurement option. This will create an option for the Resistivity command when writing a sequence which must be used to measure resistances.}
+    \label{fig:resistivity_option_multivu}
+\end{figure}
+
+When writing sequences, make sure to adhere to the following guidelines. Since the setup will be sitting for a while at the end of the sequence before anyone touches it again, it is ideal to set the temperature to 300 Kelvin at the end of the sequence. To measure the expected temperature hysteresis and compare to materials without it, the sequence must sweep up and down in temperature. Keep track of which direction (hot to cold or cold to hot) happens first, as you may want to separate these sections in the analysis. Note that though you are measuring resistances, MultiVu calls the measurement resistivity because it is made with an assumed sample shape in mind. Our samples are in general less regularly shaped, so make sure to select Ohms as the unit of measurement.
+
+If the voltage, power, or current limits are met during the course of a measurement, split the sequence into two (or four, if it goes in both directions in temperature) temperature sweeps with appropriately adjusted voltage, power, and current limits. This (in addition to broken sample wiring) is a likely solution to any flat sections of graphs that occur at the temperature extremes.
+
+A suggested measurement schedule is given below, designed to require 6 class periods of measurement. More time may be necessary in later class periods or outside of class, or one of the three sample materials can be skipped if time requires.
+
+\begin{itemize}
+    \item \textbf{Class 1:} Familiarize yourselves with using the VersaLab and MultiVu setup with the chopper and amplifier components safely and as intended, using the TA, instructor, and manuals as reference resources whenever something about the setup is unsure. First, test out a single resistance measurement of a sample of known resistance to verify which channels to use (see Fig. \ref{fig:channels} for an explanation of channels). Then, write a practice sequence to measure this repeatedly and save the data to a file, sweeping over small temperature and magnetic field ranges (keeping in mind that the chamber temperature will actually change much slower than the rate given in the sequence), and check that the data file is produced correctly. Note that the VersaLab and MultiVu have no built-in uncertainty estimation. Use a sequence or repeated single-measurements to build statistics at a few temperatures to estimate the uncertainty on a temperature measurement. Finally, if everything has gone correctly, replace the known sample with the vanadium dioxide sample, then write and start a sequence that sweeps temperature from 200-400 Kelvin and back, also sweeping through a small number of magnetic field values at each temperature. Make sure the temperature points are more than finely spaced enough to measure the expected drop or rise in resistivity, but try to keep the expected duration less than 10 hours.
+    \item \textbf{Class 2:} After securing the data from the previous class's acquisition, repeat class 1's measurement but with a bright laser fiber-coupled to the probe. In order to create the proper bias of charge carriers, make sure the light is not shining uniformly on the sample. If the light is not chopped and measured in the frequency domain with a lock-in amplifier, it is uncertain how much of the effect is from direct excitation as opposed to thermal excitation.
+    \item \textbf{Class 3-6:} Repeat the above, but for the two other samples (gallium arsenide and indium arsenide)
+\end{itemize}
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=.07]{channels.jpg}
+    \caption{The VersaLab output channels (which match the sample puck channel labels) correspond to different output channels (which match the MultiVu channel labels). For example, the $\mathrm{VO_2}$ puck uses its channel 3 connections, so MultiVu sequences must measure "Channel 2".}
+    \label{fig:channels}
+\end{figure}
+
+Assuming we are still using MultiVu's data acquisition for a given measurement instead of third-party measurements associated with the amplifier: Once a given measurement is done, the data will be saved to the file specified in the sequence. Copy the .dat files (e.g. by using a portable hard drive) to your computers. Each data file contains a header by default, which matters because it is preferable to convert the .dat files to .csv files by simply changing the file handle of the data files. Before converting the file type, you must delete this header so the top row of the .csv file is made of strings and each line below is made of numbers. After you have these .csv files(which can be checked for correctness in a program such as Jupyter Notebook), you are ready to analyze the data.
+
+\section*{Analysis}
+
+Assuming analysis is done in Python: It is recommended that (for each student) the analysis be done in a program such as Jupyter Notebook or Visual Studio Code with many sequential blocks of code in one file. Modules such as pandas (by converting .csv files to the malleable dataframe object type and making use of their many sorting and selecting functions), Numpy (for handling any arrays of numbers in typically more familiar ways than pandas), SciPy (for fitting curves to data and doing all statistics), and Matplotlib (for visualizing data) will prove useful for analysis.
+
+Whenever you acquire the data for a relation of any sort, plot it first. Given the multiple variables at play in these measurements, think carefully about how and what to plot to most transparently communicate the important details of the data. Fit curves to the data to determine graph statistics.
+
+How isolated is the direct excitation from the thermal excitation? How accurate are the temperatures given by MultiVu to the temperature of the conductive parts of the samples?
+
+It is resistance or conductance that is directly measured, but we are interested in resistivity or conductivity. Can you model the shape of the sample to determine conductivities from the measured resistances? Can you estimate the carrier number and carrier density due to temperature, magnetic field, and photoconductivity?
+
+\section*{Results during experiment development}
+
+This section is not intended for the manual as will be shown to students. It is just a showcase of some of our results from the semester.
+
+Our first $\mathrm{VO_2}$ sample was irregularly shaped, unstable, and may have broken and changed its structure at least once due to temperature stress, as suggested by Fig. \ref{fig:first_vo2_graph}. The contact resistance from the wires attached to the sample may also have been significant.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=.7]{first_vo2.png}
+    \caption{Resistivity vs. Temperature for our first vanadium dioxide sample. The orange and blue data were taken in succession, and the green data were taken (with increasing temperature) at a different time. A phase transition with hysteresis is confirmed, but the data are noisy and change significantly between runs.}
+    \label{fig:first_vo2_graph}
+\end{figure}
+
+The vanadium dioxide sample was replaced as a result of these issues, and the resulting graph shown in Fig. \ref{fig:second_vo2_graph}. We also acquired a laser and the equipment to fiber-couple, so we graph laser-lit and dark data.
+
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=.7]{second_vo2.png}
+    \caption{Resistivity vs. Temperature for our second vanadium dioxide sample. These graphs are much less noisy than before, indicating a sample and connections of higher quality. The dark graphs consistently have higher resistances than the corresponding laser-lit graphs in the insulating regime, which is caused by a mix of direct excitation and thermal excitation in uncertain proportions.}
+    \label{fig:second_vo2_graph}
+\end{figure}
+
+To compare the dark graphs to the light graphs in more detail, we divide and subtract them as shown in Fig. \ref{fig:vo2_dark_light}.
+
+\begin{figure}
+    \centering
+    \includegraphics[scale=.4]{vo2_dark_light_comparison.png}
+    \caption{Left: Resistance differences show that dark resistance is higher below transition temperature and that dark and lit resistances tend to become more similar as temperature increases, except when the phase transition begins. Right: The resistance ratio graphs show that dark resistance is a little lower above transition temperature. The downward spikes show that the sample transitions at lower chamber temperature when lit, meaning the laser is meaningfully changing the temperature. The laser's influence on the crystal transition is evidence of the unwanted thermal effect.}
+    \label{fig:vo2_dark_light}
+\end{figure}
+
+Note that these are preliminary results and have no uncertainty on them because finding uncertainties was not a priority in developing the experiment. Also, at this point, it had become known that the measurement could not be completed without a chopper and a lock-in amplifier. More data (which is not meaningfully different from the results shown in this section) was taken with different combinations of lasers and current/power/voltage limits, but we now know it will not display photoconductivity separately from light-induced thermal conductivity.
+
+\printbibliography
+
+\end{document}
